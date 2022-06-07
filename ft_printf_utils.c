@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf_funcs.c                                     :+:      :+:    :+:   */
+/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/07 23:49:06 by pfrances          #+#    #+#             */
-/*   Updated: 2022/06/07 23:49:09 by pfrances         ###   ########.fr       */
+/*   Created: 2022/06/08 00:39:34 by pfrances          #+#    #+#             */
+/*   Updated: 2022/06/08 00:39:37 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,30 +25,48 @@ size_t	print_s(char *str)
 		return (write(1, "(null)", 6));
 }
 
-size_t	print_nbr(long nb, char *base)
+size_t	print_nbr_sign(long nb, char *base)
 {
-	unsigned long	ulong_nb;
+	long	divisor;
+	long	base_len;
+	size_t	i;
+	char	buff[65];
+
+	i = 0;
+	if (nb < 0)
+	{
+		nb *= (-1);
+		buff[i++] = '-';
+	}
+	base_len = ft_strlen(base);
+	divisor = 1;
+	while (nb / divisor >= base_len)
+		divisor *= base_len;
+	while (divisor > 0)
+	{
+		buff[i++] = base[nb / divisor];
+		nb %= divisor;
+		divisor /= base_len;
+	}
+	return (write(1, buff, i));
+}
+
+size_t	print_nbr_unsign(unsigned long nb, char *base)
+{
 	unsigned long	divisor;
 	unsigned long	base_len;
 	size_t			i;
 	char			buff[65];
 
 	i = 0;
-	if (nb < 0)
-	{
-		ulong_nb = (unsigned long)(-nb);
-		buff[i++] = '-';
-	}
-	else
-		ulong_nb = (unsigned long)nb;
 	base_len = ft_strlen(base);
 	divisor = 1;
-	while (ulong_nb / divisor >= base_len)
+	while (nb / divisor >= base_len)
 		divisor *= base_len;
 	while (divisor > 0)
 	{
-		buff[i++] = base[ulong_nb / divisor];
-		ulong_nb %= divisor;
+		buff[i++] = base[nb / divisor];
+		nb %= divisor;
 		divisor /= base_len;
 	}
 	return (write(1, buff, i));

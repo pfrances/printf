@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 17:17:49 by pfrances          #+#    #+#             */
-/*   Updated: 2022/06/07 23:25:08 by pfrances         ###   ########.fr       */
+/*   Updated: 2022/06/08 00:20:56 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ typedef enum e_bool
 int		ft_printf(const char *str, ...);
 size_t	print_c(char c);
 size_t	print_s(char *str);
-size_t	print_nbr(long nb, char *base);
+size_t	print_nbr_sign(long nb, char *base);
+size_t	print_nbr_unsign(unsigned long nb, char *base);
 size_t	ft_strlen(const char *str);
 
 #endif
