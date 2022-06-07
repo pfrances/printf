@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 17:19:48 by pfrances          #+#    #+#             */
-/*   Updated: 2022/06/07 23:18:45 by pfrances         ###   ########.fr       */
+/*   Updated: 2022/06/07 23:44:05 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	ft_printf(const char *str, ...)
 				distribute(args, &result, &last_pos, str[i + 1]);
 		}
 		if (str[i + 1] == '\0')
-			result += write(1, str + last_pos + 1, i - last_pos + 1);
+			result += write(1, str + last_pos, i - last_pos + 1);
 		i++;
 	}
 	va_end(args);
@@ -92,17 +92,46 @@ int	main(void)
 	int				x = 42;
 	int				X = 150;
 
+	// setvbuf(stdin, NULL, _IONBF, 0);
+
+	// printf("printf : %d\n\n",
+	// 	printf("c %c\ns %s\np %p\nd %d\ni %i\nu %u\nx %x\nX %X\n%%\n",
+	// 	c, s, p, d, i, u , x , X));
+
+	// setvbuf(stdin, NULL, _IONBF, 0);
+
+	// printf("ft_printf : %d\n",
+	// 	ft_printf("c %c\ns %s\np %p\nd %d\ni %i\nu %u\nx %x\nX %X\n%%\n",
+	// 	c, s, p, d, i, u , x , X));
+
+
+
+	char *s2 = "This is a string     ";
 	setvbuf(stdin, NULL, _IONBF, 0);
 
-	printf("printf : %d\n\n",
-		printf("c %c\ns %s\np %p\nd %d\ni %i\nu %u\nx %x\nX %X\n%%\n",
-		c, s, p, d, i, u , x , X));
+	printf("%d\n", printf("%s", ""));
+	printf("%d\n", printf(" %s", ""));
+	printf("%d\n", printf("%s ", ""));
+	printf("%d\n", printf(" %s ", ""));
+	printf("%d\n", printf(" %s ", "-"));
+	printf("%d\n", printf(" %s %s ", "", "-"));
+	printf("%d\n", printf(" %s %s ", " - ", ""));
+	printf("%d\n", printf(" %s %s %s %s %s", " - ", "", "4", "", s2));
+	printf("%d\n", printf(" %s %s %s %s %s ", " - ", "", "4", "", "2 "));
+	printf("%d\n", printf(" NULL %s NULL ", NULL));
 
 	setvbuf(stdin, NULL, _IONBF, 0);
 
-	printf("ft_printf : %d\n",
-		ft_printf("c %c\ns %s\np %p\nd %d\ni %i\nu %u\nx %x\nX %X\n%%\n",
-		c, s, p, d, i, u , x , X));
+	printf("%d\n", ft_printf("%s", ""));
+	printf("%d\n", ft_printf(" %s", ""));
+	printf("%d\n", ft_printf("%s ", ""));
+	printf("%d\n", ft_printf(" %s ", ""));
+	printf("%d\n", ft_printf(" %s ", "-"));
+	printf("%d\n", ft_printf(" %s %s ", "", "-"));
+	printf("%d\n", ft_printf(" %s %s ", " - ", ""));
+	printf("%d\n", ft_printf(" %s %s %s %s %s", " - ", "", "4", "", s2));
+	printf("%d\n", ft_printf(" %s %s %s %s %s ", " - ", "", "4", "", "2 "));
+	printf("%d\n", ft_printf(" NULL %s NULL ", NULL));
 	return (0);
 }
 */

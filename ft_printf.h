@@ -6,12 +6,12 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 17:17:49 by pfrances          #+#    #+#             */
-/*   Updated: 2022/06/07 22:34:33 by pfrances         ###   ########.fr       */
+/*   Updated: 2022/06/07 23:25:08 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
-# define FT_PRINT_H
+# define FT_PRINTF_H
 
 # include <stddef.h>
 # include <unistd.h>

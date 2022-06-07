@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 22:36:52 by pfrances          #+#    #+#             */
-/*   Updated: 2022/06/07 23:16:50 by pfrances         ###   ########.fr       */
+/*   Updated: 2022/06/07 23:41:37 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ size_t	print_c(char c)
 
 size_t	print_s(char *str)
 {
-	return (write(1, str, ft_strlen(str)));
+	if (str != NULL)
+		return (write(1, str, ft_strlen(str)));
+	else
+		return (write(1, "(null)", 6));
 }
 
 size_t	print_nbr(long nb, char *base)
