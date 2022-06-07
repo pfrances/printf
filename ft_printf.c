@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 17:19:48 by pfrances          #+#    #+#             */
-/*   Updated: 2022/06/08 00:38:12 by pfrances         ###   ########.fr       */
+/*   Updated: 2022/06/08 00:58:42 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ static void	distribute(va_list args, size_t *result, size_t *last_pos, char c)
 	else if (c == 'u')
 		*result += print_nbr_unsign(va_arg(args, unsigned int), DECIMAL_BASE);
 	else if (c == 'x')
-		*result += print_nbr_sign(va_arg(args, long), HEXA_BASE_LOW);
+		*result += print_nbr_unsign(va_arg(args, unsigned int), HEXA_BASE_LOW);
 	else if (c == 'X')
-		*result += print_nbr_sign(va_arg(args, long), HEXA_BASE_UP);
+		*result += print_nbr_unsign(va_arg(args, unsigned int), HEXA_BASE_UP);
 	else if (c == 'p')
 	{
 		*result += write(1, "0x", 2);
@@ -160,6 +160,23 @@ int	main(void)
 	printf("%d\n", ft_printf(" %%   %%   %% "));
 	printf("%d\n", ft_printf("%%"));
 	printf("%d\n", ft_printf("%% %%"));
+
+	printf("%d\n", printf("LONG_MAX %x ", LONG_MAX));
+	printf("%d\n", printf("LONG_MIN %x ", LONG_MIN));
+	printf("%d\n", printf("UINT_MAX %x ", UINT_MAX));
+	printf("%d\n", printf("ULONG_MAX %x ", ULONG_MAX));
+	printf("%d\n", printf("9223372036854775807LL %x ", 9223372036854775807LL));
+	printf("%d\n", printf(" %x %x %x %x %x %x %x",
+		INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42));
+
+	printf("\n");
+	printf("%d\n", ft_printf("LONG_MAX %x ", LONG_MAX));
+	printf("%d\n", ft_printf("LONG_MIN %x ", LONG_MIN));
+	printf("%d\n", ft_printf("UINT_MAX %x ", UINT_MAX));
+	printf("%d\n", ft_printf("ULONG_MAX %x ", ULONG_MAX));
+	printf("%d\n", ft_printf("9223372036854775807LL %x ", 9223372036854775807LL));
+	printf("%d\n", ft_printf(" %x %x %x %x %x %x %x",
+		INT_MAX, INT_MIN, LONG_MAX, LONG_MIN, ULONG_MAX, 0, -42));
 	return (0);
 }
 */
