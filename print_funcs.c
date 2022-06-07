@@ -6,7 +6,7 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 22:36:52 by pfrances          #+#    #+#             */
-/*   Updated: 2022/06/07 22:39:18 by pfrances         ###   ########.fr       */
+/*   Updated: 2022/06/07 23:16:50 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 size_t	print_c(char c)
 {
-	return (write(STDOUT_FILENO, &c, 1));
+	return (write(1, &c, 1));
 }
 
 size_t	print_s(char *str)
 {
-	return (write(STDOUT_FILENO, str, ft_strlen(str)));
+	return (write(1, str, ft_strlen(str)));
 }
 
 size_t	print_nbr(long nb, char *base)
@@ -48,5 +48,5 @@ size_t	print_nbr(long nb, char *base)
 		ulong_nb %= divisor;
 		divisor /= base_len;
 	}
-	return (write(STDOUT_FILENO, buff, i));
+	return (write(1, buff, i));
 }

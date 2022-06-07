@@ -6,13 +6,13 @@
 /*   By: pfrances <pfrances@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 17:19:48 by pfrances          #+#    #+#             */
-/*   Updated: 2022/06/07 22:48:52 by pfrances         ###   ########.fr       */
+/*   Updated: 2022/06/07 23:18:45 by pfrances         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	is_an_option(char c)
+static int	is_an_option(char c)
 {
 	size_t	i;
 
@@ -26,7 +26,7 @@ int	is_an_option(char c)
 	return (FALSE);
 }
 
-void	do_repartition(va_list args, size_t *result, size_t *last_pos, char c)
+static void	distribute(va_list args, size_t *result, size_t *last_pos, char c)
 {
 	if (c == 'c')
 		*result += print_c(va_arg(args, int));
@@ -42,11 +42,11 @@ void	do_repartition(va_list args, size_t *result, size_t *last_pos, char c)
 		*result += print_nbr((long)va_arg(args, unsigned long), HEXA_BASE_UP);
 	else if (c == 'p')
 	{
-		*result += write(STDOUT_FILENO, "0x", 2);
+		*result += write(1, "0x", 2);
 		*result += print_nbr((long)va_arg(args, unsigned long), HEXA_BASE_LOW);
 	}
 	else if (c == '%')
-		*result += write(STDOUT_FILENO, "%%", 1);
+		*result += write(1, "%%", 1);
 	*last_pos += 2;
 }
 
@@ -68,12 +68,41 @@ int	ft_printf(const char *str, ...)
 			result += write(1, str + last_pos, i - last_pos);
 			last_pos = i;
 			if (is_an_option(str[i + 1]) == TRUE)
-				do_repartition(args, &result, &last_pos, str[i + 1]);
+				distribute(args, &result, &last_pos, str[i + 1]);
 		}
 		if (str[i + 1] == '\0')
-			result += write(STDOUT_FILENO, str + last_pos, i - last_pos + 1);
+			result += write(1, str + last_pos + 1, i - last_pos + 1);
 		i++;
 	}
 	va_end(args);
 	return ((int)result);
 }
+
+//////////////////////////////////////////////////////////////
+/*							MAIN							*/
+/*
+int	main(void)
+{
+	char			c = 'A';
+	char			*s = "hello";
+	void			*p = &s;
+	int				d = 10;
+	int				i = -5;
+	unsigned int	u = 123;
+	int				x = 42;
+	int				X = 150;
+
+	setvbuf(stdin, NULL, _IONBF, 0);
+
+	printf("printf : %d\n\n",
+		printf("c %c\ns %s\np %p\nd %d\ni %i\nu %u\nx %x\nX %X\n%%\n",
+		c, s, p, d, i, u , x , X));
+
+	setvbuf(stdin, NULL, _IONBF, 0);
+
+	printf("ft_printf : %d\n",
+		ft_printf("c %c\ns %s\np %p\nd %d\ni %i\nu %u\nx %x\nX %X\n%%\n",
+		c, s, p, d, i, u , x , X));
+	return (0);
+}
+*/
